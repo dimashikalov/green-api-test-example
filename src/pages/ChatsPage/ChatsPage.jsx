@@ -1,11 +1,11 @@
 import React from "react";
 import ChatList from "../../components/ChatList/ChatList";
 import MessageList from "../../components/MessageList/MessageList";
-import "./chatList.css";
+import "./chatPage.css";
 
 const ChatsPage = () => {
   return (
-    <div className="chatListWrapper">
+    <div className="chatPageWrapper">
       <ChatList />
       <MessageList />
     </div>
