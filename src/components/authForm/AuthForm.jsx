@@ -1,20 +1,34 @@
 import React, { useContext, useState } from "react";
 import "./authForm.css";
 import { AuthContext } from "../../context/AuthContext";
-import { getAuthStatus } from "../../api/api";
+import { getAuthStatus, handlerStatus } from "../../api/api";
 const AuthForm = () => {
-  const { idInstance, apiTokenInstance } = useContext(AuthContext);
+  const { setIdInstance, setApiTokenInstance, setIsAuth } =
+    useContext(AuthContext);
   const [id, setId] = useState("");
   const [token, setToken] = useState("");
+  const [showError, setShowError] = useState(false);
+  const [errorText, setErrorText] = useState("");
 
-  const handleForm = (e) => {
+  const handleForm = async (e) => {
     e.preventDefault();
-    const formData = {
-      idInstance: id,
-      apiTokenInstance: token,
-    };
 
-    getAuthStatus(formData.idInstance, formData.apiTokenInstance);
+    const userStatus = await getAuthStatus(id, token);
+
+    if (userStatus === "authorized") {
+      setIdInstance(id);
+      setApiTokenInstance(token);
+      setIsAuth(true);
+      return;
+    }
+
+    if (userStatus === "undefined") {
+      setShowError(true);
+      setErrorText("Неправильный idInstance или apiTokenInstance");
+    }
+
+    setErrorText(handlerStatus(userStatus));
+    setShowError(true);
   };
 
   return (
@@ -39,6 +53,8 @@ const AuthForm = () => {
           <input type="submit" value="Login" />
         </div>
       </form>
+
+      {showError && <h3>{errorText}</h3>}
     </div>
   );
 };
