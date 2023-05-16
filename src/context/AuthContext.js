@@ -6,6 +6,6 @@ export const AuthContext = createContext({
   isAuth: false,
 });
 
-const AuthDataProvider = ({ children }) => {
-  get;
-};
+// const AuthDataProvider = ({ children }) => {
+//   get;
+// };
