@@ -1,11 +1,5 @@
 import { createContext, useState } from "react";
 
-// export const AuthContext = createContext({
-//   idInstance: "",
-//   apiTokenInstance: "",
-//   isAuth: false,
-// });
-
 export const AuthContext = createContext();
 
 const AuthDataProvider = ({ children }) => {

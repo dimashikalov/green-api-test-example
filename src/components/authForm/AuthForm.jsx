@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import "./authForm.css";
 import { AuthContext } from "../../context/AuthContext";
-import { getAuthStatus, handlerStatus } from "../../api/api";
+import { getAuthStatus, handlerStatus } from "../../api/getAuthStatus";
+
 const AuthForm = () => {
   const { setIdInstance, setApiTokenInstance, setIsAuth } =
     useContext(AuthContext);
