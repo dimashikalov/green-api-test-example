@@ -1,13 +1,16 @@
 import axios from "axios";
 
-export const checkTelNumber = async (
+export const sendMessageInWhatsUpp = async (
   idInstance,
   apiTokenInstance,
-  telNumber
+  chatId,
+  message
 ) => {
-  let url = `https://api.green-api.com/waInstance${idInstance}/CheckWhatsapp/${apiTokenInstance}`;
+  let url = `https://api.green-api.com/waInstance${idInstance}/SendMessage/${apiTokenInstance}`;
+
   let raw = JSON.stringify({
-    phoneNumber: Number(telNumber),
+    chatId: chatId,
+    message: message,
   });
 
   try {
@@ -17,7 +20,7 @@ export const checkTelNumber = async (
       },
     });
 
-    return responce.data.existsWhatsapp;
+    console.log("resp", responce.data);
   } catch (error) {
     console.log("errror", error);
   }
