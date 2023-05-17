@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import "./search.css";
 import { checkTelNumber } from "../../api/checkTelNumber";
 import { AuthContext } from "../../context/AuthContext";
+import { ChatContext } from "../../context/ChatContext";
 
 const validatePlusOrEightInNumber = (telNumber) => {
   if (telNumber.startsWith("+")) {
@@ -17,6 +18,7 @@ const Search = ({ addChat, checkChat }) => {
   const [value, setValue] = useState("");
   const [errorText, setErrorText] = useState("");
   const { idInstance, apiTokenInstance } = useContext(AuthContext);
+  const { setChatId } = useContext(ChatContext);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -54,6 +56,7 @@ const Search = ({ addChat, checkChat }) => {
     };
     if (!checkChat(newChat.chatId)) {
       addChat(newChat);
+      setChatId(newChat.chatId);
       setValue("");
     } else {
       return setErrorText("Чат уже существует");

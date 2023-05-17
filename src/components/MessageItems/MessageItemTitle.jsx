@@ -1,7 +1,8 @@
 import React from "react";
+import "./messageItem.css";
 
-const MessageItemTitle = () => {
-  return <div>MessageItemTitle</div>;
+const MessageItemTitle = ({ title }) => {
+  return <div className="messageItemTitleWrapper">{title}</div>;
 };
 
 export default MessageItemTitle;

@@ -1,7 +1,7 @@
 import React from "react";
 
 const MessageItemList = () => {
-  return <div>MessageItemList</div>;
+  return <div className="messageItemListWrapper">MessageItemList</div>;
 };
 
 export default MessageItemList;

@@ -3,13 +3,11 @@ import "./chatItem.css";
 import { ChatContext } from "../../context/ChatContext";
 
 const ChatItem = ({ chat }) => {
-  const { chatId, setChatId } = useContext(ChatContext);
+  const { setChatId } = useContext(ChatContext);
 
   const handleClickChatId = () => {
     setChatId(chat.chatId);
   };
-  console.log("chat", chat);
-  console.log("chatId", chatId);
   return (
     <div key={chat.chatId} className="chatItemWrapper">
       <h6 onClick={handleClickChatId}>{chat.title}</h6>
