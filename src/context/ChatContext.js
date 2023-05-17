@@ -6,13 +6,13 @@ const ChatContextProvider = ({ children }) => {
   const [chatList, setChatList] = useState([]);
   const [chatId, setChatId] = useState("");
 
-  const currentChat = useRef();
+  const [currentChat, setCurrentChat] = useState();
 
   useEffect(() => {
     chatList.filter((chat) => {
       if (chat.chatId === chatId) {
-        currentChat.current = chat;
-        console.log(currentChat);
+        setCurrentChat(chat);
+        console.log("cr", currentChat);
       }
     });
   }, [chatId]);

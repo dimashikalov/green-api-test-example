@@ -7,12 +7,21 @@ import { ChatContext } from "../../context/ChatContext";
 
 const MessageList = () => {
   const { currentChat } = useContext(ChatContext);
-  const chatCurrent = currentChat.current;
+  console.log("ml", currentChat);
+
+  const messageRender = () => {
+    return (
+      <>
+        <MessageItemTitle title={currentChat.title} />
+        <MessageItemList messages={currentChat.messages} />
+        <MessageItemInput chatId={currentChat.chatId} />
+      </>
+    );
+  };
   return (
     <div className="messageListWrapper">
-      <MessageItemTitle title={chatCurrent.title} />
-      <MessageItemList messages={chatCurrent.messages} />
-      <MessageItemInput chatId={chatCurrent.chatId} />
+      {!currentChat && <h4>Выберите чат</h4>}
+      {currentChat && messageRender()}
     </div>
   );
 };

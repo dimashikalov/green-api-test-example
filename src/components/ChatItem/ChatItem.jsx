@@ -7,6 +7,7 @@ const ChatItem = ({ chat }) => {
 
   const handleClickChatId = () => {
     setChatId(chat.chatId);
+    console.log("eee", chat.chatId);
   };
   return (
     <div key={chat.chatId} className="chatItemWrapper">

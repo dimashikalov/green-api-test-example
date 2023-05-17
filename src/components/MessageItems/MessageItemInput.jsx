@@ -1,10 +1,10 @@
 import React from "react";
 
-const MessageItemInput = () => {
+const MessageItemInput = ({ chatid }) => {
   return (
     <div className="messageItemInputWrapper">
-      <input />
-      <button>Add</button>
+      <input className="messageInput" />
+      <button className="messageButton">Add</button>
     </div>
   );
 };
