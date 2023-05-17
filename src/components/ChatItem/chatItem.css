@@ -1,0 +1,12 @@
+.chatItemWrapper {
+  font-size: 25px;
+  text-align: center;
+}
+
+h6:hover {
+  cursor: pointer;
+}
+
+h6:active {
+  color: darkgrey;
+}

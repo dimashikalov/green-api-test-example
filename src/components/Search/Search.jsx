@@ -61,7 +61,7 @@ const Search = ({ addChat, checkChat }) => {
   };
 
   return (
-    <div>
+    <div className="searchWrapper">
       <input
         className="searchInput"
         value={value}

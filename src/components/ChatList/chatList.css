@@ -1,3 +1,6 @@
 .chatListWrapper {
   width: 30%;
+  border: 1px solid lightgray;
+  height: 80vh;
+  padding: 10px;
 }
