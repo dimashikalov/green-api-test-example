@@ -17,7 +17,10 @@ const ChatList = () => {
   return (
     <div className="chatListWrapper">
       <Search addChat={addChat} checkChat={checkChat} />
-      <div>{chatList && chatList.map((chat) => <ChatItem chat={chat} />)}</div>
+      <div>
+        {chatList &&
+          chatList.map((chat) => <ChatItem chat={chat} key={chat.chatId} />)}
+      </div>
     </div>
   );
 };

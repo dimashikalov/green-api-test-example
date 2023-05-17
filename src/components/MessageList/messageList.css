@@ -1,0 +1,7 @@
+.messageListWrapper {
+  width: 70%;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
