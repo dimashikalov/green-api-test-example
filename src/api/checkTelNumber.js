@@ -26,7 +26,8 @@ export const checkTelNumber = async (
         "Content-Type": "application/json",
       },
     });
-    console.log("res", responce.data);
+
+    return responce.data.existsWhatsapp;
   } catch (error) {
     console.log("errror", error);
   }

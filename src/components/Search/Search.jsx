@@ -3,14 +3,17 @@ import "./search.css";
 import { checkTelNumber } from "../../api/checkTelNumber";
 import { AuthContext } from "../../context/AuthContext";
 
-const validatePlusInNumber = (telNumber) => {
+const validatePlusOrEightInNumber = (telNumber) => {
   if (telNumber.startsWith("+")) {
     return telNumber.slice(1);
+  }
+  if (telNumber.startsWith("8")) {
+    return telNumber.replace("8", "7");
   }
   return telNumber;
 };
 
-const Search = () => {
+const Search = ({ addChat, checkChat }) => {
   const [value, setValue] = useState("");
   const [errorText, setErrorText] = useState("");
   const { idInstance, apiTokenInstance } = useContext(AuthContext);
@@ -19,18 +22,42 @@ const Search = () => {
     setValue(e.target.value);
   };
 
-  const handleCheckAndAddChat = () => {
+  const handleCheckAndAddChat = async () => {
     setErrorText("");
+
     if (!Number(value)) {
       return setErrorText("Неправильно написанный номер телефона");
     }
-    console.log(value.length);
+
     if (value.length < 11 || value.length > 12) {
       return setErrorText("Номер телефона имеет неправильную длинну");
     }
-    const validateTelNumber = validatePlusInNumber(value);
-    console.log("vvv", validateTelNumber);
-    checkTelNumber(idInstance, apiTokenInstance, validateTelNumber);
+
+    const validateTelNumber = validatePlusOrEightInNumber(value);
+
+    let checkWhatsapp = await checkTelNumber(
+      idInstance,
+      apiTokenInstance,
+      validateTelNumber
+    );
+
+    return checkWhatsapp
+      ? addNewChat(validateTelNumber, value)
+      : setErrorText("Этот номер не имеет Whatsapp аккаунта");
+  };
+
+  const addNewChat = (telNumber, value) => {
+    const newChat = {
+      chatId: `${telNumber}@c.us`,
+      title: value,
+      messages: [],
+    };
+    if (!checkChat(newChat.chatId)) {
+      addChat(newChat);
+      setValue("");
+    } else {
+      return setErrorText("Чат уже существует");
+    }
   };
 
   return (
