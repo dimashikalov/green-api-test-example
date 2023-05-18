@@ -20,5 +20,7 @@ export const getMessagesInChat = async (
     });
 
     return responce.data;
-  } catch (error) {}
+  } catch (error) {
+    console.log("error", error);
+  }
 };
