@@ -21,7 +21,7 @@ const ChatContextProvider = ({ children }) => {
     if (currentChatFind) {
       chatList.map((chat) => {
         if (chat.chatId === chatId) {
-          chat.messages = [...messages];
+          chat.messages = [...messages.reverse()];
           setChatList([...chatList]);
         }
       });

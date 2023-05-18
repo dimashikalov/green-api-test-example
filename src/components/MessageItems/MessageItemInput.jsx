@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { sendMessageInWhatsUpp } from "../../api/sendMessageInWhatsupp";
 import { ChatContext } from "../../context/ChatContext";
@@ -16,23 +16,20 @@ const MessageItemInput = ({ chatId }) => {
 
   const sendMessage = async () => {
     await sendMessageInWhatsUpp(idInstance, apiTokenInstance, chatId, value);
-    let messages = await getMessagesInChat(
-      idInstance,
-      apiTokenInstance,
-      chatId
-    );
 
-    addMessageInChat(chatId, messages);
-    console.log("mess", messages);
-    console.log("messChal", chatList);
-    setValue("");
+    setTimeout(() => {
+      getMessagesInChat(idInstance, apiTokenInstance, chatId).then((result) => {
+        addMessageInChat(chatId, result);
+        setValue("");
+      });
+    }, 1000);
   };
 
   return (
     <div className="messageItemInputWrapper">
       <input className="messageInput" value={value} onChange={handleChange} />
       <button className="messageButton" onClick={sendMessage}>
-        Add
+        Send
       </button>
     </div>
   );

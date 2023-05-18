@@ -9,7 +9,7 @@ export const getMessagesInChat = async (
 
   let raw = JSON.stringify({
     chatId,
-    count: 100,
+    count: 50,
   });
 
   try {
