@@ -7,7 +7,6 @@ import { ChatContext } from "../../context/ChatContext";
 
 const MessageList = () => {
   const { currentChat } = useContext(ChatContext);
-  console.log("ml", currentChat);
 
   const messageRender = () => {
     return (

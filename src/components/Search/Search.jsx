@@ -37,15 +37,17 @@ const Search = ({ addChat, checkChat }) => {
 
     const validateTelNumber = validatePlusOrEightInNumber(value);
 
-    let checkWhatsapp = await checkTelNumber(
-      idInstance,
-      apiTokenInstance,
-      validateTelNumber
-    );
+    // let checkWhatsapp = await checkTelNumber(
+    //   idInstance,
+    //   apiTokenInstance,
+    //   validateTelNumber
+    // );
 
-    return checkWhatsapp
-      ? addNewChat(validateTelNumber, value)
-      : setErrorText("Этот номер не имеет Whatsapp аккаунта");
+    // return checkWhatsapp
+    //   ? addNewChat(validateTelNumber, value)
+    //   : setErrorText("Этот номер не имеет Whatsapp аккаунта");
+
+    return addNewChat(validateTelNumber, value);
   };
 
   const addNewChat = (telNumber, value) => {

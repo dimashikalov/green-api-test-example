@@ -12,14 +12,32 @@ const ChatContextProvider = ({ children }) => {
     chatList.filter((chat) => {
       if (chat.chatId === chatId) {
         setCurrentChat(chat);
-        console.log("cr", currentChat);
       }
     });
   }, [chatId]);
 
+  const addMessageInChat = (chatId, messages) => {
+    let currentChatFind = chatList.find((chat) => chat.chatId === chatId);
+    if (currentChatFind) {
+      chatList.map((chat) => {
+        if (chat.chatId === chatId) {
+          chat.messages = [...messages];
+          setChatList([...chatList]);
+        }
+      });
+    }
+  };
+
   return (
     <ChatContext.Provider
-      value={{ chatList, setChatList, chatId, setChatId, currentChat }}
+      value={{
+        chatList,
+        setChatList,
+        chatId,
+        setChatId,
+        currentChat,
+        addMessageInChat,
+      }}
     >
       {children}
     </ChatContext.Provider>

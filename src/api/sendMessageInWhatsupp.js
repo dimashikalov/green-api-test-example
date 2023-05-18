@@ -20,7 +20,7 @@ export const sendMessageInWhatsUpp = async (
       },
     });
 
-    console.log("resp", responce.data);
+    return responce.data.idMessage;
   } catch (error) {
     console.log("errror", error);
   }
