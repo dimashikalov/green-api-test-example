@@ -16,17 +16,28 @@ const ChatContextProvider = ({ children }) => {
     });
   }, [chatId]);
 
-  const addMessageInChat = (chatId, messages) => {
+  const addMessageInChat = (chatId, message) => {
     let currentChatFind = chatList.find((chat) => chat.chatId === chatId);
     if (currentChatFind) {
       chatList.map((chat) => {
         if (chat.chatId === chatId) {
-          chat.messages = [...messages.reverse()];
+          chat.messages = [...chat.messages, message];
           setChatList([...chatList]);
         }
       });
     }
   };
+  // const addMessageInChat = (chatId, messages) => {
+  //   let currentChatFind = chatList.find((chat) => chat.chatId === chatId);
+  //   if (currentChatFind) {
+  //     chatList.map((chat) => {
+  //       if (chat.chatId === chatId) {
+  //         chat.messages = [...messages.reverse()];
+  //         setChatList([...chatList]);
+  //       }
+  //     });
+  //   }
+  // };
 
   return (
     <ChatContext.Provider

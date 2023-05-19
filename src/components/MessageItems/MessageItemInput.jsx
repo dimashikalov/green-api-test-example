@@ -6,8 +6,7 @@ import { getMessagesInChat } from "../../api/getMessagesInChat";
 
 const MessageItemInput = ({ chatId }) => {
   const { idInstance, apiTokenInstance } = useContext(AuthContext);
-  const { chatid, chatList, setChatList, addMessageInChat } =
-    useContext(ChatContext);
+  const { addMessageInChat } = useContext(ChatContext);
   const [value, setValue] = useState("");
 
   const handleChange = (e) => {
@@ -15,14 +14,30 @@ const MessageItemInput = ({ chatId }) => {
   };
 
   const sendMessage = async () => {
-    await sendMessageInWhatsUpp(idInstance, apiTokenInstance, chatId, value);
+    let result = await sendMessageInWhatsUpp(
+      idInstance,
+      apiTokenInstance,
+      chatId,
+      value
+    );
+    if (result) {
+      let newMessage = {
+        idMessage: result,
+        textMessage: value,
+        type: "outgoing",
+        timestamp: Date.now(),
+      };
 
-    setTimeout(() => {
-      getMessagesInChat(idInstance, apiTokenInstance, chatId).then((result) => {
-        addMessageInChat(chatId, result);
-        setValue("");
-      });
-    }, 1000);
+      addMessageInChat(chatId, newMessage);
+      setValue("");
+    }
+
+    // setTimeout(() => {
+    //   getMessagesInChat(idInstance, apiTokenInstance, chatId).then((result) => {
+    //     addMessageInChat(chatId, result);
+    //     setValue("");
+    //   });
+    // }, 1000);
   };
 
   return (

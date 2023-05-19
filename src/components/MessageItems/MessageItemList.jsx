@@ -1,6 +1,7 @@
 import React from "react";
 
 const MessageItemList = ({ messages }) => {
+  console.log("mews", messages);
   return (
     <div className="messageItemListWrapper">
       {messages.map((item) => (
