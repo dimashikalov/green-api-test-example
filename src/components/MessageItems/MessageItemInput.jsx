@@ -28,16 +28,9 @@ const MessageItemInput = ({ chatId }) => {
         timestamp: Date.now(),
       };
 
-      addMessageInChat(chatId, newMessage);
+      await addMessageInChat(chatId, newMessage);
       setValue("");
     }
-
-    // setTimeout(() => {
-    //   getMessagesInChat(idInstance, apiTokenInstance, chatId).then((result) => {
-    //     addMessageInChat(chatId, result);
-    //     setValue("");
-    //   });
-    // }, 1000);
   };
 
   return (

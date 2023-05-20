@@ -27,3 +27,16 @@
 .messageButton {
   height: 40px;
 }
+
+.message {
+  border: 1px solid lightgreen;
+  padding: 10px;
+  border-radius: 5px;
+  align-self: flex-start;
+  margin-left: 15px;
+}
+
+.incoming {
+  border: 1px solid lightcoral;
+  margin-right: 15px;
+}

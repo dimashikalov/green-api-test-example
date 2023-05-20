@@ -1,11 +1,17 @@
 import React from "react";
+import "./messageItem.css";
 
 const MessageItemList = ({ messages }) => {
   console.log("mews", messages);
   return (
     <div className="messageItemListWrapper">
       {messages.map((item) => (
-        <div key={item.idMessage}>{item.textMessage}</div>
+        <div
+          className={`message ${item.type === "incoming" ? "incoming" : ""}`}
+          key={item.idMessage}
+        >
+          {item.textMessage}
+        </div>
       ))}
     </div>
   );

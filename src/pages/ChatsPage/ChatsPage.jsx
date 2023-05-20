@@ -9,11 +9,12 @@ import { deleteNotifications } from "../../api/deleteNotifications";
 
 const ChatsPage = () => {
   const { idInstance, apiTokenInstance } = useContext(AuthContext);
-  const { chatId, addMessageInChat } = useContext(ChatContext);
+  const { addMessageInChat } = useContext(ChatContext);
 
   const getMessagesFromNotifications = async () => {
     let res = await getNotifications(idInstance, apiTokenInstance);
     console.log("re1", res);
+
     if (res !== null) {
       if (res.body.typeWebhook === "incomingMessageReceived") {
         let newMessage = {
@@ -22,27 +23,24 @@ const ChatsPage = () => {
           type: "incoming",
           timestamp: res.body.timestamp,
         };
-
-        console.log("answ", newMessage);
-        addMessageInChat(chatId, newMessage);
+        let chatId = res.body.senderData.chatId;
+        console.log("answ", newMessage, chatId);
+        await addMessageInChat(chatId, newMessage);
       }
 
       console.log("re2", res);
-      let deleteSuccess = await deleteNotifications(
-        idInstance,
-        apiTokenInstance,
-        res.receiptId
-      );
+      await deleteNotifications(idInstance, apiTokenInstance, res.receiptId);
 
       getMessagesFromNotifications();
-      console.log("del", deleteSuccess);
     }
 
-    return;
+    setTimeout(() => {
+      getMessagesFromNotifications();
+      console.log("del");
+    }, 30000);
   };
 
   useEffect(() => {
-    // getNotifications(idInstance, apiTokenInstance);
     getMessagesFromNotifications();
   }, []);
 

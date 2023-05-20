@@ -9,11 +9,7 @@ const ChatContextProvider = ({ children }) => {
   const [currentChat, setCurrentChat] = useState();
 
   useEffect(() => {
-    chatList.filter((chat) => {
-      if (chat.chatId === chatId) {
-        setCurrentChat(chat);
-      }
-    });
+    setCurrentChat(chatList.find((chat) => chat.chatId === chatId));
   }, [chatId]);
 
   const addMessageInChat = (chatId, message) => {
@@ -22,8 +18,8 @@ const ChatContextProvider = ({ children }) => {
       chatList.map((chat) => {
         if (chat.chatId === chatId) {
           chat.messages = [...chat.messages, message];
-          setChatList([...chatList]);
         }
+        setChatList([...chatList]);
       });
     }
   };
