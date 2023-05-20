@@ -1,4 +1,4 @@
-import { createContext, useEffect, useRef, useState } from "react";
+import { createContext, useCallback, useEffect, useRef, useState } from "react";
 
 export const ChatContext = createContext();
 
@@ -12,7 +12,7 @@ const ChatContextProvider = ({ children }) => {
     setCurrentChat(chatList.find((chat) => chat.chatId === chatId));
   }, [chatId]);
 
-  const addMessageInChat = (chatId, message) => {
+  const addMessageInChat = useCallback((chatId, message) => {
     let currentChatFind = chatList.find((chat) => chat.chatId === chatId);
     if (currentChatFind) {
       chatList.map((chat) => {
@@ -22,7 +22,7 @@ const ChatContextProvider = ({ children }) => {
         setChatList([...chatList]);
       });
     }
-  };
+  });
   // const addMessageInChat = (chatId, messages) => {
   //   let currentChatFind = chatList.find((chat) => chat.chatId === chatId);
   //   if (currentChatFind) {

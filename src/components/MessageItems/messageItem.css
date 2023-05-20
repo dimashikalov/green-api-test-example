@@ -38,5 +38,6 @@
 
 .incoming {
   border: 1px solid lightcoral;
-  margin-right: 15px;
+  margin-right: 25px;
+  align-self: flex-end;
 }

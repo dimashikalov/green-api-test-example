@@ -24,14 +24,12 @@ const ChatsPage = () => {
           timestamp: res.body.timestamp,
         };
         let chatId = res.body.senderData.chatId;
-        console.log("answ", newMessage, chatId);
         await addMessageInChat(chatId, newMessage);
       }
 
-      console.log("re2", res);
       await deleteNotifications(idInstance, apiTokenInstance, res.receiptId);
 
-      getMessagesFromNotifications();
+      return getMessagesFromNotifications();
     }
 
     setTimeout(() => {
@@ -42,6 +40,7 @@ const ChatsPage = () => {
 
   useEffect(() => {
     getMessagesFromNotifications();
+    console.log("repeat");
   }, []);
 
   return (
