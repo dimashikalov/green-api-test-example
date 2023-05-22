@@ -1,6 +1,7 @@
 {
   "name": "green-api-test-example",
   "version": "0.1.0",
+  "homepage": "https://dimashikalov.github.io/green-api-test-example",
   "private": true,
   "dependencies": {
     "@green-api/whatsapp-api-client": "^0.3.35",
@@ -17,6 +18,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -39,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
