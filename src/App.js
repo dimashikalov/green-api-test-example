@@ -1,5 +1,4 @@
 import AppRoutes from "./pages/AppRoutes";
-import MainPage from "./pages/MainPage/MainPage";
 import "./App.css";
 
 function App() {

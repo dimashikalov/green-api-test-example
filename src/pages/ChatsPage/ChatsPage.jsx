@@ -6,10 +6,13 @@ import { getNotifications } from "../../api/getNotifications";
 import { AuthContext } from "../../context/AuthContext";
 import { ChatContext } from "../../context/ChatContext";
 import { deleteNotifications } from "../../api/deleteNotifications";
+import { addMessageInChat } from "../../store/chatStore";
+import { useDispatch } from "react-redux";
 
 const ChatsPage = () => {
   const { idInstance, apiTokenInstance } = useContext(AuthContext);
-  const { addMessageInChat } = useContext(ChatContext);
+  const dispatch = useDispatch();
+  // const { addMessageInChat } = useContext(ChatContext);
 
   const getMessagesFromNotifications = async () => {
     let res = await getNotifications(idInstance, apiTokenInstance);
@@ -24,7 +27,9 @@ const ChatsPage = () => {
           timestamp: res.body.timestamp,
         };
         let chatId = res.body.senderData.chatId;
-        await addMessageInChat(chatId, newMessage);
+
+        let action = { chatId, newMessage };
+        dispatch(addMessageInChat(action));
       }
 
       await deleteNotifications(idInstance, apiTokenInstance, res.receiptId);

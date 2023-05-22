@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import "./search.css";
-import { checkTelNumber } from "../../api/checkTelNumber";
 import { AuthContext } from "../../context/AuthContext";
-import { ChatContext } from "../../context/ChatContext";
+import { addChat, getCurrentChat, setChatId } from "../../store/chatStore";
+import { useDispatch } from "react-redux";
 
 const validatePlusOrEightInNumber = (telNumber) => {
   if (telNumber.startsWith("+")) {
@@ -14,11 +14,12 @@ const validatePlusOrEightInNumber = (telNumber) => {
   return telNumber;
 };
 
-const Search = ({ addChat, checkChat }) => {
+const Search = ({ checkChat }) => {
   const [value, setValue] = useState("");
   const [errorText, setErrorText] = useState("");
   const { idInstance, apiTokenInstance } = useContext(AuthContext);
-  const { setChatId } = useContext(ChatContext);
+  // const { setChatId } = useContext(ChatContext);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -57,8 +58,9 @@ const Search = ({ addChat, checkChat }) => {
       messages: [],
     };
     if (!checkChat(newChat.chatId)) {
-      addChat(newChat);
-      setChatId(newChat.chatId);
+      dispatch(addChat(newChat));
+      dispatch(setChatId(newChat.chatId));
+      dispatch(getCurrentChat(newChat.chatId));
       setValue("");
     } else {
       return setErrorText("Чат уже существует");
